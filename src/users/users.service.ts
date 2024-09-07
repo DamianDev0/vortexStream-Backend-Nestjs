@@ -26,6 +26,8 @@ export class UsersService {
   }
 
   async create(createUserDto: RegisterDto) {
+    console.log(createUserDto);
+    
     return await this.userRepository.save(createUserDto);
   }
 }

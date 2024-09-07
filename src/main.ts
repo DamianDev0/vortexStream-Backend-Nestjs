@@ -9,7 +9,7 @@ async function bootstrap() {
   const logger = new Logger('Bootstrap');
 
   // Set a global prefix for all routes
-  app.setGlobalPrefix('vortexstream');
+  app.setGlobalPrefix('vortextream');
 
   // Configure CORS
 
