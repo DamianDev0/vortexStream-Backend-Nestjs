@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersService } from './users/users.service';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
+import { BankService } from './bank/bank.service';
+import { BankController } from './bank/bank.controller';
 
 @Module({
   imports: [
@@ -29,7 +31,7 @@ import { AuthService } from './auth/auth.service';
       inject: [ConfigService],
     }),
   ],
-  controllers: [AuthController],
-  providers: [UsersService, AuthService],
+  controllers: [AuthController, BankController],
+  providers: [UsersService, AuthService, BankService],
 })
 export class AppModule {}
