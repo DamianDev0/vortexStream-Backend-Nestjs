@@ -1,26 +1,50 @@
-import { Injectable } from '@nestjs/common';
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
+import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/register.dto';
+import { UsersService } from 'src/users/users.service';
+import * as bcryptjs from 'bcryptjs'
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+
+  constructor(
+    private readonly jwtServices: JwtService,
+    private readonly userServices: UsersService
+  ){}
+  
+  async login( user: LoginDto){
+    const userFound = await this.userServices.findByEmailWithPassword(user.username)
+
+    if(!userFound) throw new UnauthorizedException('Username not found')
+
+    const isValidPassword = await bcryptjs.compare(user.password, userFound.password)
+
+    if(!isValidPassword) throw new UnauthorizedException('Password is wrong')
+
+    const payload = { username: user.username, role: userFound.role}
+    
+    const token = await this.jwtServices.signAsync(payload)
+
+    return {
+      token, 
+      userFound
+    }
   }
 
-  findAll() {
-    return `This action returns all auth`;
-  }
+  async register(userDto: RegisterDto){
+    const user = await this.userServices.findUserByEmail(userDto.email)
 
-  findOne(id: number) {
-    return `This action returns a #${id} auth`;
-  }
+    if(user) throw new Error('User already exists')
 
-  update(id: number, updateAuthDto: UpdateAuthDto) {
-    return `This action updates a #${id} auth`;
-  }
+    const hashPassword = await bcryptjs.hash(userDto.password, 10)
 
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
+    await this.userServices.create({
+      username: userDto.username,
+      email: userDto.email,
+      password: hashPassword
+    })
+
+    return userDto.email, userDto.username
   }
 }
