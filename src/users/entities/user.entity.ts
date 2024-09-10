@@ -1,8 +1,10 @@
+import { PayMethod } from 'src/pay_method/entities/pay_method.entity';
 import { Role } from '../../common/enum/Roles.enum';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -53,4 +55,7 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @OneToMany(() => PayMethod, (payMethod) => payMethod.user)
+  payMethods: PayMethod[];
 }
