@@ -12,27 +12,34 @@ export class AuthService {
     private readonly userServices: UsersService,
   ) {}
 
-  async login(user: LoginDto) {
-    const userFound = await this.userServices.findByEmailWithPassword(
-      user.username,
+  async login({ username, password }: LoginDto) {
+    const userFound = await this.userServices.findByUsernameWithPassword(
+      username,
     );
+    console.log(userFound);
 
     if (!userFound) throw new UnauthorizedException('Username not found');
 
     const isValidPassword = await bcryptjs.compare(
-      user.password,
+      password,
       userFound.password,
     );
 
     if (!isValidPassword) throw new UnauthorizedException('Password is wrong');
 
-    const payload = { username: user.username, role: userFound.role };
+    const payload = { username: username, role: userFound.role };
 
     const token = await this.jwtServices.signAsync(payload);
-
+    console.log(token);
+    
     return {
       token,
-      userFound,
+      user: {
+        id: userFound.id,
+        username: userFound.username,
+        country: userFound.country,
+        role: userFound.role
+      },
     };
   }
 

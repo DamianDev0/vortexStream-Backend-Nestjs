@@ -11,5 +11,8 @@ export class RegisterDto {
   @MinLength(8)
   password: string;
 
+  @IsString()
+  country: string;
+
   status: boolean;
 }

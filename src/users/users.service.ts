@@ -14,10 +14,10 @@ export class UsersService {
     return await this.userRepository.find();
   }
 
-  async findByEmailWithPassword(username: string) {
+  async findByUsernameWithPassword(username: string) {
     return await this.userRepository.findOne({
       where: { username },
-      select: ['id', 'email', 'password', 'role'],
+      select: ['id', 'username', 'country', 'password', 'role'],
     });
   }
 
