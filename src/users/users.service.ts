@@ -17,7 +17,7 @@ export class UsersService {
   async findByUsernameWithPassword(username: string) {
     return await this.userRepository.findOne({
       where: { username },
-      select: ['id', 'username', 'country', 'password', 'role'],
+      select: ['id', 'username', 'country', 'password', 'role', 'urlprofile'],
     });
   }
 

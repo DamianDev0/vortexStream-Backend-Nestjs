@@ -15,4 +15,6 @@ export class RegisterDto {
   country: string;
 
   status: boolean;
+
+  urlprofile?: string;
 }

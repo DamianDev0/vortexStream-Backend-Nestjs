@@ -38,7 +38,8 @@ export class AuthService {
         id: userFound.id,
         username: userFound.username,
         country: userFound.country,
-        role: userFound.role
+        role: userFound.role,
+        urlprofile: userFound.urlprofile
       },
     };
   }
@@ -49,11 +50,14 @@ export class AuthService {
 
     if (user) throw new Error('User already exists');
 
+    const profileImageUrl ='https://res.cloudinary.com/dpqbn1gqb/image/upload/v1726014285/avatar_a8uzxz.jpg'
+
     const hashPassword = await bcryptjs.hash(userDto.password, 10);
 
     await this.userServices.create({
       ...userDto,
       password: hashPassword,
+      urlprofile: profileImageUrl
     });
 
     return {
