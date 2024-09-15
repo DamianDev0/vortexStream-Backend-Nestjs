@@ -40,8 +40,13 @@ export class AuthController {
   @AuthDecorator(Role.USER)
   @Patch(':id')
   updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto, @ActiveUser() user: ActiveUserInterface ){
-    console.log(updateUserDto, id);
     
     return this.userServices.updateUser(id, updateUserDto, user )
+  }
+
+  @AuthDecorator(Role.USER)
+  @Get('findoneuser/:id')
+  findOneUserById(@Param('id') id: string, @ActiveUser() user: ActiveUserInterface) {
+    return this.userServices.FindOne(id, user);
   }
 }
