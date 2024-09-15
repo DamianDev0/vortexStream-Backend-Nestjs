@@ -1,24 +1,35 @@
 import { Bank } from 'src/bank/entities/banck.entity';
 import { User } from 'src/users/entities/user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class PayMethod {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => User, (user) => user.payMethods)
+  @OneToOne(() => User)
+  @JoinColumn({ name: 'userId', referencedColumnName: 'id'})
   user: User;
 
-  @ManyToOne(() => Bank, (bank) => bank.payMethods)
+  @Column()
+  userId: string
+
+  @Column()
+  nameCardHolder: string
+
+  @ManyToOne(() => Bank)
+  @JoinColumn({ name: 'bankId', referencedColumnName: 'id'})
   bank: Bank;
 
   @Column()
-  cardNumber: string;
+  bankId: string
 
   @Column()
-  cvv: string;
+  cardNumber: number;
 
   @Column()
-  experationDate: string;
+  cvv: number;
+
+  @Column()
+  experationDate: Date;
 }

@@ -4,7 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -39,7 +39,7 @@ export class User {
   country?: string;
 
   @Column({ nullable: true })
-  phoneNumber?: string;
+  phoneNumber?: number;
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role;
@@ -56,6 +56,6 @@ export class User {
   @UpdateDateColumn()
   updatedAt: Date;
 
-  @OneToMany(() => PayMethod, (payMethod) => payMethod.user)
+  @OneToOne(() => PayMethod, (payMethod) => payMethod.user)
   payMethods: PayMethod[];
 }
