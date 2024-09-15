@@ -12,42 +12,57 @@ export class AuthService {
     private readonly userServices: UsersService,
   ) {}
 
-  async login(user: LoginDto) {
-    const userFound = await this.userServices.findByEmailWithPassword(
-      user.username,
+  async login({ username, password }: LoginDto) {
+    const userFound = await this.userServices.findByUsernameWithPassword(
+      username,
     );
 
     if (!userFound) throw new UnauthorizedException('Username not found');
 
     const isValidPassword = await bcryptjs.compare(
-      user.password,
+      password,
       userFound.password,
     );
 
     if (!isValidPassword) throw new UnauthorizedException('Password is wrong');
 
-    const payload = { username: user.username, role: userFound.role };
+    const payload = { username: username, role: userFound.role, id: userFound.id };
 
     const token = await this.jwtServices.signAsync(payload);
-
+    console.log(token);
+    
     return {
       token,
-      userFound,
+      user: {
+        id: userFound.id,
+        username: userFound.username,
+        email: userFound.email,
+        country: userFound.country,
+        role: userFound.role,
+        urlprofile: userFound.urlprofile
+      },
     };
   }
 
   async register(userDto: RegisterDto) {
     const user = await this.userServices.findUserByEmail(userDto.email);
+    console.log(userDto);
 
     if (user) throw new Error('User already exists');
+
+    const profileImageUrl ='https://res.cloudinary.com/dpqbn1gqb/image/upload/v1726014285/avatar_a8uzxz.jpg'
 
     const hashPassword = await bcryptjs.hash(userDto.password, 10);
 
     await this.userServices.create({
       ...userDto,
       password: hashPassword,
+      urlprofile: profileImageUrl
     });
 
-    return userDto.email, userDto.username;
+    return {
+      email: userDto.email,
+      username: userDto.username,
+    };
   }
 }

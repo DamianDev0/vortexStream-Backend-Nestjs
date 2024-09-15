@@ -4,6 +4,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module'; // Import UsersModule
 import { BankModule } from './bank/bank.module';
 import { AuthModule } from './auth/auth.module';
+import { PayMethodModule } from './pay_method/pay_method.module';
+import { CloudinaryModule } from './common/cloudinary/cloudinary.module';
+import { SubcriptionsModule } from './subcriptions/subcriptions.module';
 
 @Module({
   imports: [
@@ -16,14 +19,14 @@ import { AuthModule } from './auth/auth.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        type: 'postgres',
+        type: 'mysql',
         host: configService.get<string>('DATABASE_HOST'),
         port: configService.get<number>('DATABASE_PORT'),
         username: configService.get<string>('DATABASE_USER'),
         password: configService.get<string>('DATABASE_PASSWORD'),
         database: configService.get<string>('DATABASE_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'], // Make sure this resolves correctly
-        synchronize: false, // Disable this in production for safety
+        synchronize: true, // Disable this in production for safety
       }),
       inject: [ConfigService],
     }),
@@ -32,6 +35,9 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     AuthModule,
     BankModule,
+    PayMethodModule,
+    CloudinaryModule,
+    SubcriptionsModule
   ],
   controllers: [],
   providers: [],

@@ -10,4 +10,11 @@ export class RegisterDto {
   @IsString()
   @MinLength(8)
   password: string;
+
+  @IsString()
+  country: string;
+
+  status: boolean;
+
+  urlprofile?: string;
 }

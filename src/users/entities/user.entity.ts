@@ -1,8 +1,10 @@
+import { PayMethod } from 'src/pay_method/entities/pay_method.entity';
 import { Role } from '../../common/enum/Roles.enum';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -12,17 +14,17 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
-  name: string;
+  @Column({ nullable: true })
+  name?: string;
 
-  @Column({ nullable: false })
-  secondName: string;
+  @Column({ nullable: true })
+  secondName?: string;
 
-  @Column()
-  lastName: string;
+  @Column({ nullable: true })
+  lastName?: string;
 
-  @Column()
-  bornDate: Date;
+  @Column({ nullable: true })
+  bornDate?: Date;
 
   @Column({ unique: true, nullable: false })
   email: string;
@@ -33,24 +35,27 @@ export class User {
   @Column({ nullable: false, select: false })
   password: string;
 
-  @Column()
-  country: string;
+  @Column({ nullable: true })
+  country?: string;
 
-  @Column()
-  phoneNumber: string;
+  @Column({ nullable: true })
+  phoneNumber?: string;
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role;
 
-  @Column({ default: true })
+  @Column({ default: true, select: false })
   status: boolean;
 
-  @Column()
-  urlprofile: string;
+  @Column({ nullable: true })
+  urlprofile?: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ select: false })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ select: false })
   updatedAt: Date;
+
+  @OneToOne(() => PayMethod, (payMethod) => payMethod.user)
+  payMethods: PayMethod[];
 }

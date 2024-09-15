@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { PayMethod } from 'src/pay_method/entities/pay_method.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Bank {
@@ -13,4 +14,7 @@ export class Bank {
 
   @Column()
   phoneNumber: string;
+
+  @OneToMany(() => PayMethod, (payMethod) => payMethod.bank)
+  payMethods: PayMethod[];
 }
