@@ -16,7 +16,6 @@ export class AuthService {
     const userFound = await this.userServices.findByUsernameWithPassword(
       username,
     );
-    console.log(userFound);
 
     if (!userFound) throw new UnauthorizedException('Username not found');
 
@@ -27,7 +26,7 @@ export class AuthService {
 
     if (!isValidPassword) throw new UnauthorizedException('Password is wrong');
 
-    const payload = { username: username, role: userFound.role };
+    const payload = { username: username, role: userFound.role, id: userFound.id };
 
     const token = await this.jwtServices.signAsync(payload);
     console.log(token);
@@ -37,6 +36,7 @@ export class AuthService {
       user: {
         id: userFound.id,
         username: userFound.username,
+        email: userFound.email,
         country: userFound.country,
         role: userFound.role,
         urlprofile: userFound.urlprofile

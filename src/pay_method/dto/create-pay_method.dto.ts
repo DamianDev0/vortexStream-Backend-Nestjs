@@ -1,12 +1,21 @@
-import { IsString } from 'class-validator';
+import { IsDate, IsString } from 'class-validator';
 
 export class PayMethodDto {
   @IsString()
-  cardNumber: string;
+  userId: string;
 
   @IsString()
-  cvv: string;
+  nameCardHolder: string;
 
   @IsString()
-  experationDate: string;
+  bankId: string
+  
+  @IsString()
+  cardNumber: number;
+
+  @IsString()
+  cvv: number;
+
+  @IsDate()
+  experationDate: Date;
 }
