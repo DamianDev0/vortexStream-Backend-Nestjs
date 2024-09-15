@@ -27,6 +27,6 @@ export class UpdateUserDto{
     country?: string;
   
     @IsOptional()
-    @IsNumber()
-    phoneNumber?: number;
+    @IsString()
+    phoneNumber?: string;
 }

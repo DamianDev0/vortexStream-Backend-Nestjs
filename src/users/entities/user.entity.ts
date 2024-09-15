@@ -39,21 +39,21 @@ export class User {
   country?: string;
 
   @Column({ nullable: true })
-  phoneNumber?: number;
+  phoneNumber?: string;
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role;
 
-  @Column({ default: true })
+  @Column({ default: true, select: false })
   status: boolean;
 
   @Column({ nullable: true })
   urlprofile?: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ select: false })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ select: false })
   updatedAt: Date;
 
   @OneToOne(() => PayMethod, (payMethod) => payMethod.user)

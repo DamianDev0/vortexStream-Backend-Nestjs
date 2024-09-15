@@ -16,6 +16,8 @@ export class UsersService {
     if( userFound.id !== user.id){
       throw new UnauthorizedException('You do not have permissions')
     }
+
+    return userFound
   }
 
   async findAll() {
@@ -27,7 +29,7 @@ export class UsersService {
 
     if(!userFound) throw new Error('User not found')
 
-      this.validateOwnerShip(userFound, user)
+      return this.validateOwnerShip(userFound, user)
   }
 
   async findByUsernameWithPassword(username: string) {
