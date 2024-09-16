@@ -1,4 +1,5 @@
 import { Bank } from 'src/bank/entities/banck.entity';
+import { Subscription } from 'src/subcriptions/entities/subcription.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -32,4 +33,7 @@ export class PayMethod {
 
   @Column()
   experationDate: Date;
+
+  @OneToOne(() => Subscription, (subcription) => subcription.payMethod)
+  subcription: Subscription
 }

@@ -11,7 +11,7 @@ import { PayMethodService } from './pay_method.service';
 import { PayMethodDto } from './dto/create-pay_method.dto';
 import { UpdatePayMethodDto } from './dto/update-pay_method.dto';
 
-@Controller('pay-method')
+@Controller('paymethod')
 export class PayMethodController {
   constructor(private readonly payMethodService: PayMethodService) {}
 

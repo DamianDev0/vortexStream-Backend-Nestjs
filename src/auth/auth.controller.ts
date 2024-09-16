@@ -8,11 +8,13 @@ import { Role } from 'src/common/enum/Roles.enum';
 import { AuthDecorator } from './decorators/auth.decorator';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
+import { ChangeEmailAndPassword } from './dto/updatePassword&Login.dto';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService,
-    private readonly userServices: UsersService
+  constructor(
+    private readonly authService: AuthService,
+    private readonly userServices: UsersService,
   ) {}
 
   @Post('register')
@@ -33,20 +35,46 @@ export class AuthController {
 
   @AuthDecorator(Role.ADMIN)
   @Get('allUser')
-  findUsers(){
-    return this.userServices.findAll()
+  findUsers() {
+    return this.userServices.findAll();
   }
 
   @AuthDecorator(Role.USER)
   @Patch(':id')
-  updateUser(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto, @ActiveUser() user: ActiveUserInterface ){
-    
-    return this.userServices.updateUser(id, updateUserDto, user )
+  updateUser(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDto,
+    @ActiveUser() user: ActiveUserInterface,
+  ) {
+    return this.userServices.updateUser(id, updateUserDto, user);
   }
 
   @AuthDecorator(Role.USER)
   @Get('findoneuser/:id')
-  findOneUserById(@Param('id') id: string, @ActiveUser() user: ActiveUserInterface) {
+  findOneUserById(
+    @Param('id') id: string,
+    @ActiveUser() user: ActiveUserInterface,
+  ) {
     return this.userServices.FindOne(id, user);
+  }
+
+  @AuthDecorator(Role.USER)
+  @Patch('changepassword/:id')
+  updatePassword(
+    @Param('id') id: string,
+    @Body() changeEmailAndPasswordDto: ChangeEmailAndPassword,
+    @ActiveUser() user: ActiveUserInterface,
+  ) {
+    return this.authService.changePassword(id, changeEmailAndPasswordDto, user);
+  }
+
+  @AuthDecorator(Role.USER)
+  @Patch('changeemail/:id')
+  updateEmail(
+    @Param('id') id: string,
+    @Body() changeEmailAndPasswordDto: ChangeEmailAndPassword,
+    @ActiveUser() user: ActiveUserInterface,
+  ) {
+    return this.authService.changeEmail(id, changeEmailAndPasswordDto, user);
   }
 }

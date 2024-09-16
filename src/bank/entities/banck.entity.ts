@@ -1,5 +1,5 @@
 import { PayMethod } from 'src/pay_method/entities/pay_method.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Bank {
