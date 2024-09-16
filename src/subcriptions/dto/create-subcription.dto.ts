@@ -1,3 +1,8 @@
+import { IsString } from "class-validator";
+
 export class CreateSubcriptionDto {
-    id: string;
+    
+    @IsString()
+    userId: string;
+
 }

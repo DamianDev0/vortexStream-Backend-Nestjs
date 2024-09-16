@@ -8,6 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Subscription } from 'src/subcriptions/entities/subcription.entity';
 
 @Entity()
 export class User {
@@ -29,7 +30,7 @@ export class User {
   @Column({ unique: true, nullable: false })
   email: string;
 
-  @Column()
+  @Column({unique: true })
   username: string;
 
   @Column({ nullable: false, select: false })
@@ -58,4 +59,7 @@ export class User {
 
   @OneToOne(() => PayMethod, (payMethod) => payMethod.user)
   payMethods: PayMethod[];
+
+  @OneToOne(() => Subscription, (subcription) => subcription.user)
+  subcription: Subscription[];
 }
