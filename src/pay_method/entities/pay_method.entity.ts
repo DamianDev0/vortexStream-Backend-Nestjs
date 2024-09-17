@@ -32,7 +32,7 @@ export class PayMethod {
   cvv: number;
 
   @Column()
-  experationDate: Date;
+  expirationDate: string;
 
   @OneToOne(() => Subscription, (subcription) => subcription.payMethod)
   subcription: Subscription

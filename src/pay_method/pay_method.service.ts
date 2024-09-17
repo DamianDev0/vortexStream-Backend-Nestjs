@@ -25,6 +25,8 @@ export class PayMethodService {
 
   // Service to create pay methods
   async create(payMethodDto: PayMethodDto, user: ActiveUserInterface) {
+    console.log(payMethodDto);
+    
     const bankFound = await this.bankServices.findOne(payMethodDto.bankId)
 
     if(!bankFound) throw new BadRequestException('Bank not found')
@@ -54,15 +56,32 @@ export class PayMethodService {
     return this.validateOwnerShip(payMethod, user)
   }
 
-  // Update a pay method by id
-  async update(id: string, updatePayMethodDto: UpdatePayMethodDto, user: ActiveUserInterface) {
-    const payMethod = this.findOne(id, user);
-    
-    if (!payMethod) {
-      throw new NotFoundException(`PayMethod with id ${id} not found`);
+
+    // Get a single pay method by id
+    async findOneByUserId(userId: string, user: ActiveUserInterface) {
+      const payMethod = await this.PayMethodRepository.findOne({
+        where: { userId: userId },
+      });
+   
+      
+      if(!payMethod) throw new BadRequestException('PayMethod not found')
+  
+      return this.validateOwnerShip(payMethod, user)
     }
 
-    return await this.PayMethodRepository.update(id, updatePayMethodDto);
+  // Update a pay method by id
+  async update(userId: string, updatePayMethodDto: UpdatePayMethodDto, user: ActiveUserInterface) {
+    const payMethod = await this.findOneByUserId(userId, user);
+    console.log(updatePayMethodDto);
+    
+    
+    if (!payMethod) {
+      throw new NotFoundException(`PayMethod with id ${userId} not found`);
+    }
+
+    return await this.PayMethodRepository.update(payMethod, {
+      ...updatePayMethodDto
+    });
   }
 
   // Delete a pay method by id
