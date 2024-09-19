@@ -35,8 +35,10 @@ export class PayMethodController {
   // GET /pay-method/:id - Get a single pay method by ID
   @AuthDecorator(Role.USER)
   @Get(':id')
-  async findOne(@Param('id') id: string, @ActiveUser() user: ActiveUserInterface) {
-    return await this.payMethodService.findOne(id, user);
+  async findOne(@Param('id') userId: string, @ActiveUser() user: ActiveUserInterface) {
+    console.log(userId);
+    
+    return await this.payMethodService.findOneByUserId(userId, user);
   }
 
   // PATCH /pay-method/:id - Update a pay method by ID
