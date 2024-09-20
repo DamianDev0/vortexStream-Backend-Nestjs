@@ -1,12 +1,13 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { FavoriteService } from './favorite.service';
 import { CreateFavoriteDto } from './dto/create-favorite.dto';
-import { UpdateFavoriteDto } from './dto/update-favorite.dto';
-import { AuthDecorator } from 'src/auth/decorators/auth.decorator';
-import { Role } from 'src/common/enum/Roles.enum';
-import { ActiveUser } from 'src/common/decorators/activeUser.decorator';
-import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
+import { AuthDecorator } from '../auth/decorators/auth.decorator';
+import { Role } from '../common/enum/Roles.enum';
+import { ActiveUser } from '../common/decorators/activeUser.decorator';
+import { ActiveUserInterface } from '../common/interface/activeUser.interface';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Favorite')
 @Controller('favorite')
 export class FavoriteController {
   constructor(private readonly favoriteService: FavoriteService) {}
