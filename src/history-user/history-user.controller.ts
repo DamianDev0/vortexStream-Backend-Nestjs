@@ -30,12 +30,11 @@ export class HistoryUserController {
     return await this.historyUserService.create(createHistoryUserDto, user);
   }
 
-  @Get('getAll/:id')
+  @Get()
   async findAll(
-    @Param('id') userId: string,
     @ActiveUser() user: ActiveUserInterface,
   ) {
-    return await this.historyUserService.findAll(userId, user);
+    return await this.historyUserService.findAll(user);
   }
 
   @Get('findOne/:id')
