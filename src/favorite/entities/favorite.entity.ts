@@ -20,16 +20,16 @@ export class Favorite {
     mediaId: string;
 
     @Column()
-    imgMedia: string;
+    backdrop_path: string;
 
     @Column()
-    mediaTitle: string;
+    title: string;
 
     @Column({ length: 1200 })
-    synopsis: string;
+    overview: string;
 
     @Column()
-    raiting: number;
+    vote_average: number;
 
     @CreateDateColumn({ select: false })
     createdAt: Date;
