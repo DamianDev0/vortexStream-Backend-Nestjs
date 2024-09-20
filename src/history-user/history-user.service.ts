@@ -30,9 +30,8 @@ export class HistoryUserService {
     return await this.historyUserRepository.save(createHistoryUserDto)
   }
 
-  async findAll(userId: string, user: ActiveUserInterface) {
-    this.validateOwnerShip(userId, user)
-    return this.historyUserRepository.find({where: {userId: userId}});
+  async findAll(user: ActiveUserInterface) {
+    return this.historyUserRepository.find({where: {userId: user.id}});
   }
 
   async findOne(mediaId: string, user: ActiveUserInterface) {
