@@ -1,5 +1,5 @@
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class Favorite {
@@ -30,4 +30,10 @@ export class Favorite {
 
     @Column()
     raiting: number;
+
+    @CreateDateColumn({ select: false })
+    createdAt: Date;
+  
+    @UpdateDateColumn({ select: false })
+    updatedAt: Date;
 }

@@ -46,14 +46,7 @@ export class FavoriteService {
     const favoriteFound = await this.favoriteRepository.findOne({where: {id}})
     
     this.validateOwnerShip(favoriteFound.userId, user)
-
-    const media = await this.favoriteRepository.findOne({
-      where: { id },
-    });
-
-    if (!media) {
-      throw new Error(`Favorite with id ${id} not found`);
-    }
-    return await this.favoriteRepository.remove(media);
+  
+    return await this.favoriteRepository.remove(favoriteFound);
   }
 }
