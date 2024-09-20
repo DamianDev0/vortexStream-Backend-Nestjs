@@ -25,9 +25,9 @@ export class Favorite {
     @Column()
     mediaTitle: string;
 
-    @Column()
+    @Column({ length: 1200 })
     synopsis: string;
 
     @Column()
-    rating: number;
+    raiting: number;
 }

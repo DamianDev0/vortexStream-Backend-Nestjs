@@ -1,6 +1,9 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsString, MaxLength, maxLength } from "class-validator";
 
 export class CreateFavoriteDto {
+    @IsString()
+    userId: string;
+    
     @IsString()
     mediaId: string;
 
@@ -11,8 +14,9 @@ export class CreateFavoriteDto {
     mediaTitle: string;
 
     @IsString()
+    @MaxLength(600) 
     synopsis: string;
 
     @IsNumber()
-    rating: number;
+    raiting: number;
 }

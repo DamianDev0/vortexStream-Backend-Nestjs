@@ -22,6 +22,8 @@ export class PayMethodController {
   @AuthDecorator(Role.USER)
   @Post()
   async create(@Body() payMethodDto: PayMethodDto, @ActiveUser() user: ActiveUserInterface) {
+    console.log(payMethodDto);
+    
     return await this.payMethodService.create(payMethodDto, user);
   }
 
@@ -36,7 +38,6 @@ export class PayMethodController {
   @AuthDecorator(Role.USER)
   @Get(':id')
   async findOne(@Param('id') userId: string, @ActiveUser() user: ActiveUserInterface) {
-    console.log(userId);
     
     return await this.payMethodService.findOneByUserId(userId, user);
   }

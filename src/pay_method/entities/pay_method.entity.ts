@@ -26,10 +26,10 @@ export class PayMethod {
   bankId: string
 
   @Column()
-  cardNumber: number;
+  cardNumber: string;
 
   @Column()
-  cvv: number;
+  cvv: string;
 
   @Column()
   expirationDate: string;
