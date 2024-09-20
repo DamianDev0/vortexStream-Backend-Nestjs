@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { PayMethodModule } from './pay_method/pay_method.module';
 import { CloudinaryModule } from './common/cloudinary/cloudinary.module';
 import { SubcriptionsModule } from './subcriptions/subcriptions.module';
+import { FavoriteModule } from './favorite/favorite.module';
 
 @Module({
   imports: [
@@ -37,7 +38,8 @@ import { SubcriptionsModule } from './subcriptions/subcriptions.module';
     BankModule,
     PayMethodModule,
     CloudinaryModule,
-    SubcriptionsModule
+    SubcriptionsModule,
+    FavoriteModule
   ],
   controllers: [],
   providers: [],
