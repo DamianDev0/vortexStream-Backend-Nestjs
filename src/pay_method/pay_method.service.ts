@@ -25,7 +25,6 @@ export class PayMethodService {
 
   // Service to create pay methods
   async create(payMethodDto: PayMethodDto, user: ActiveUserInterface) {
-    console.log(payMethodDto);
     
     const bankFound = await this.bankServices.findOne(payMethodDto.bankId)
 
@@ -50,6 +49,9 @@ export class PayMethodService {
     const payMethod = await this.PayMethodRepository.findOne({
       where: { id },
     });
+
+    console.log(payMethod);
+    
     
     if(!payMethod) throw new BadRequestException('PayMethod not found')
 
@@ -62,7 +64,7 @@ export class PayMethodService {
       const payMethod = await this.PayMethodRepository.findOne({
         where: { userId: userId },
       });
-   
+      console.log(payMethod);
       
       if(!payMethod) throw new BadRequestException('PayMethod not found')
   
@@ -72,7 +74,7 @@ export class PayMethodService {
   // Update a pay method by id
   async update(userId: string, updatePayMethodDto: UpdatePayMethodDto, user: ActiveUserInterface) {
     const payMethod = await this.findOneByUserId(userId, user);
-    console.log(updatePayMethodDto);
+   
     
     
     if (!payMethod) {
