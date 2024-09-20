@@ -8,15 +8,15 @@ export class CreateFavoriteDto {
     mediaId: string;
 
     @IsString()
-    imgMedia: string;
+    backdrop_path: string;
 
     @IsString()
-    mediaTitle: string;
+    title: string;
 
     @IsString()
     @MaxLength(1200) 
-    synopsis: string;
+    overview: string;
 
     @IsNumber()
-    raiting: number;
+    vote_average: number;
 }
