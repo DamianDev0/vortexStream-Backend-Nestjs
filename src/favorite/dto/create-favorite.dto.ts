@@ -14,7 +14,7 @@ export class CreateFavoriteDto {
     mediaTitle: string;
 
     @IsString()
-    @MaxLength(600) 
+    @MaxLength(1200) 
     synopsis: string;
 
     @IsNumber()
