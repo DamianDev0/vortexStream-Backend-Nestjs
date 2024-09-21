@@ -8,13 +8,14 @@ import {
   Delete,
 } from '@nestjs/common';
 import { SubcriptionsService } from './subcriptions.service';
-import { CreateSubcriptionDto } from './dto/create-subcription.dto';
 import { UpdateSubcriptionDto } from './dto/update-subcription.dto';
 import { AuthDecorator } from 'src/auth/decorators/auth.decorator';
 import { Role } from 'src/common/enum/Roles.enum';
 import { ActiveUser } from 'src/common/decorators/activeUser.decorator';
 import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Subcriptions')
 @Controller('subcriptions')
 export class SubcriptionsController {
   constructor(private readonly subcriptionsService: SubcriptionsService) {}

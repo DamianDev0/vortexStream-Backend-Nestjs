@@ -9,7 +9,9 @@ import { AuthDecorator } from './decorators/auth.decorator';
 import { UpdateUserDto } from './dto/updateUser.dto';
 import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
 import { ChangeEmailAndPassword } from './dto/updatePassword&Login.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Auth') 
 @Controller('auth')
 export class AuthController {
   constructor(
