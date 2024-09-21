@@ -17,7 +17,7 @@ import { HistoryUserModule } from './history-user/history-user.module';
       isGlobal: true,
     }),
 
-    // TypeOrmModule for PostgreSQL connection
+    // TypeOrmModule for Mysql connection
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
@@ -28,7 +28,7 @@ import { HistoryUserModule } from './history-user/history-user.module';
         password: configService.get<string>('DATABASE_PASSWORD'),
         database: configService.get<string>('DATABASE_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'], // Make sure this resolves correctly
-        synchronize: true, // Disable this in production for safety
+        synchronize: false, // Disable this in production for safety
       }),
       inject: [ConfigService],
     }),
