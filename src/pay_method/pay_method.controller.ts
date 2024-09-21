@@ -14,7 +14,9 @@ import { AuthDecorator } from 'src/auth/decorators/auth.decorator';
 import { Role } from 'src/common/enum/Roles.enum';
 import { ActiveUser } from 'src/common/decorators/activeUser.decorator';
 import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('PayMethod')
 @Controller('paymethod')
 export class PayMethodController {
   constructor(private readonly payMethodService: PayMethodService) {}

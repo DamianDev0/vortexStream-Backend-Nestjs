@@ -10,6 +10,6 @@ import { BankService } from 'src/bank/bank.service';
   imports: [TypeOrmModule.forFeature([PayMethod, Bank])],
   controllers: [PayMethodController],
   providers: [PayMethodService, BankService],
-  exports: [PayMethodService], // Para que pueda ser inyectado en otros módulos.  //  En este caso, PayMethodService es exportado para que pueda ser usado en otros módulos.  //  Este módulo tiene un controlador (PayMethodController) y un proveedor (PayMethodService).  //  El proveedor se exporta para que pueda ser usado en otros módulos.
+  exports: [PayMethodService], 
 })
 export class PayMethodModule {}

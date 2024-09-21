@@ -12,7 +12,9 @@ import { BankDto } from './dtos/create-bank.dto';
 import { UpdateBankDto } from './dtos/update-bank.dto';
 import { AuthDecorator } from 'src/auth/decorators/auth.decorator';
 import { Role } from 'src/common/enum/Roles.enum';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Banks')
 @Controller('bank')
 export class BankController {
   constructor(private readonly bankService: BankService) {}

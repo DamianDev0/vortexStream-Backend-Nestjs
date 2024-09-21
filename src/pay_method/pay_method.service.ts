@@ -91,11 +91,4 @@ export class PayMethodService {
     if(id !== user.id) throw new UnauthorizedException("You don't have permissions")
     return await this.PayMethodRepository.delete(id);
   }
-
-  // async searchByUserId(user: string) {
-  //   return await this.PayMethodRepository.findOne({
-  //     where: { user },
-  //     relations: ['bank'],
-  //   })
-  // }
 }
