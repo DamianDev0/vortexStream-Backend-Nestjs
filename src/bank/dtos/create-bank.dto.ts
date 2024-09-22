@@ -1,4 +1,5 @@
-import { IsString } from 'class-validator';
+import { IsString, IsOptional, IsArray } from 'class-validator';
+import { PayMethod } from '../../pay_method/entities/pay_method.entity';
 
 export class BankDto {
   @IsString()
@@ -9,4 +10,8 @@ export class BankDto {
 
   @IsString()
   phoneNumber: string;
+
+  @IsOptional()
+  @IsArray()
+  payMethods?: PayMethod[]; // Cambia a PayMethod[] si usas entidades
 }

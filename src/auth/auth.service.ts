@@ -1,14 +1,14 @@
-import { BadGatewayException, BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { UsersService } from '../users/users.service';
 import * as bcryptjs from 'bcryptjs';
-import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
+import { ActiveUserInterface } from '../common/interface/activeUser.interface';
 import { ChangeEmailAndPassword } from './dto/updatePassword&Login.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Subscription } from 'src/subcriptions/entities/subcription.entity';
+import { Subscription } from '../subcriptions/entities/subcription.entity';
 
 @Injectable()
 export class AuthService {

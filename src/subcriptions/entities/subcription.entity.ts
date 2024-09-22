@@ -1,5 +1,5 @@
-import { PayMethod } from 'src/pay_method/entities/pay_method.entity';
-import { User } from 'src/users/entities/user.entity';
+import { PayMethod } from '../../pay_method/entities/pay_method.entity';
+import { User } from '../../users/entities/user.entity';
 import {
   Column,
   CreateDateColumn,

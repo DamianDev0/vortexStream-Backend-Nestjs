@@ -1,6 +1,6 @@
-import { Bank } from 'src/bank/entities/banck.entity';
-import { Subscription } from 'src/subcriptions/entities/subcription.entity';
-import { User } from 'src/users/entities/user.entity';
+import { Bank } from '../../bank/entities/banck.entity';
+import { Subscription } from '../../subcriptions/entities/subcription.entity';
+import { User } from '../../users/entities/user.entity';
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()

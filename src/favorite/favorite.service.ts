@@ -4,8 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Favorite } from './entities/favorite.entity';
 import { Repository } from 'typeorm';
 import { BadGatewayException, Injectable, UnauthorizedException } from '@nestjs/common';
-import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
-import { User } from 'src/users/entities/user.entity';
+import { ActiveUserInterface } from '../common/interface/activeUser.interface';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class FavoriteService {

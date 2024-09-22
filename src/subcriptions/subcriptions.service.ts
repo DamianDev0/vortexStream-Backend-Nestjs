@@ -4,9 +4,9 @@ import { UpdateSubcriptionDto } from './dto/update-subcription.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Subscription } from './entities/subcription.entity';
 import { Repository } from 'typeorm';
-import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
-import { Role } from 'src/common/enum/Roles.enum';
-import { User } from 'src/users/entities/user.entity';
+import { ActiveUserInterface } from '../common/interface/activeUser.interface';
+import { Role } from '../common/enum/Roles.enum';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class SubcriptionsService {

@@ -7,10 +7,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { RegisterDto } from '../auth/dto/register.dto';
-import { UpdateUserDto } from 'src/auth/dto/updateUser.dto';
-import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
-import { ChangeEmailAndPassword } from 'src/auth/dto/updatePassword&Login.dto';
-import { SubcriptionsService } from 'src/subcriptions/subcriptions.service';
+import { UpdateUserDto } from '../auth/dto/updateUser.dto';
+import { ActiveUserInterface } from '../common/interface/activeUser.interface';
+import { ChangeEmailAndPassword } from '../auth/dto/updatePassword&Login.dto';
+import { SubcriptionsService } from '../subcriptions/subcriptions.service';
 
 @Injectable()
 export class UsersService {
