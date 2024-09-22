@@ -1,4 +1,4 @@
-import {BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {BadRequestException, ConflictException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
@@ -47,13 +47,13 @@ export class AuthService {
       username,
     );
 
-    if (!userFound) throw new UnauthorizedException('Username not found');
+    if (!userFound) throw new ConflictException('Username not found');
 
     const isValidPassword = await bcryptjs.compare(password, userFound.password)
     console.log(isValidPassword);
     
 
-    if (!isValidPassword) throw new UnauthorizedException('Password is wrong');
+    if (!isValidPassword) throw new ConflictException('Password is wrong');
 
     const payload = { username: username, role: userFound.role, id: userFound.id };
 
@@ -75,10 +75,14 @@ export class AuthService {
   }
 
   async register(userDto: RegisterDto) {
-    const user = await this.userServices.findUserByEmail(userDto.email);
-    console.log(userDto);
+    const userFoundByusername = await this.userServices.findByUsername(userDto.username)
 
-    if (user) throw new Error('User already exists');
+    if(userFoundByusername) throw new ConflictException('Username already exists')
+    
+    console.log(userDto);
+    const userFoundByEmail = await this.userServices.findUserByEmail(userDto.email);
+
+    if (userFoundByEmail) throw new ConflictException('Email already exists');
 
     const profileImageUrl ='https://res.cloudinary.com/dpqbn1gqb/image/upload/v1726014285/avatar_a8uzxz.jpg'
 
