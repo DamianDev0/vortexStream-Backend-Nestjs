@@ -24,4 +24,8 @@ export class CreateHistoryUserDto {
     @IsOptional()
     @IsNumber()
     rating: number;
+
+    @IsOptional()
+    @IsString()
+    typeMedia?: string;
 }

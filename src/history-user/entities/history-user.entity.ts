@@ -31,6 +31,9 @@ export class HistoryUser {
     @Column()
     rating: number;
 
+    @Column({ nullable: true })
+    typeMedia?: string;
+
     @CreateDateColumn({ select: false })
     createdAt: Date;
   
