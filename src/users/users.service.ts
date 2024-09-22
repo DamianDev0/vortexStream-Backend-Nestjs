@@ -66,7 +66,11 @@ export class UsersService {
   }
 
   async findUserByEmail(email: string) {
-    return this.userRepository.findOne({ where: { email } });
+    return await this.userRepository.findOne({ where: { email } });
+  }
+
+  async findByUsername(username: string){
+    return await this.userRepository.findOne({where: {username}})
   }
 
   async create(createUserDto: RegisterDto) {
