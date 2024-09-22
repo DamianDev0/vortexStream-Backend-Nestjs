@@ -9,10 +9,10 @@ import {
 } from '@nestjs/common';
 import { SubcriptionsService } from './subcriptions.service';
 import { UpdateSubcriptionDto } from './dto/update-subcription.dto';
-import { AuthDecorator } from 'src/auth/decorators/auth.decorator';
-import { Role } from 'src/common/enum/Roles.enum';
-import { ActiveUser } from 'src/common/decorators/activeUser.decorator';
-import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
+import { AuthDecorator } from '../auth/decorators/auth.decorator';
+import { Role } from '../common/enum/Roles.enum';
+import { ActiveUser } from '../common/decorators/activeUser.decorator';
+import { ActiveUserInterface } from '../common/interface/activeUser.interface';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Subcriptions')

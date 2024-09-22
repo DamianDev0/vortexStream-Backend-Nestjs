@@ -10,8 +10,8 @@ import {
 import { BankService } from './bank.service';
 import { BankDto } from './dtos/create-bank.dto';
 import { UpdateBankDto } from './dtos/update-bank.dto';
-import { AuthDecorator } from 'src/auth/decorators/auth.decorator';
-import { Role } from 'src/common/enum/Roles.enum';
+import { AuthDecorator } from '../auth/decorators/auth.decorator';
+import { Role } from '../common/enum/Roles.enum';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Banks')
@@ -23,7 +23,8 @@ export class BankController {
   @AuthDecorator(Role.ADMIN)
   @Post()
   async create(@Body() bankDto: BankDto) {
-    return await this.bankService.create(bankDto);
+    const createdBank = await this.bankService.create(bankDto);
+    return { id: createdBank.id, ...bankDto }; // Asegúrate de incluir el ID
   }
 
   // GET /bank - Get all banks

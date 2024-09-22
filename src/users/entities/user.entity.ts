@@ -1,4 +1,4 @@
-import { PayMethod } from 'src/pay_method/entities/pay_method.entity';
+import { PayMethod } from '../../pay_method/entities/pay_method.entity';
 import { Role } from '../../common/enum/Roles.enum';
 import {
   Column,
@@ -8,7 +8,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Subscription } from 'src/subcriptions/entities/subcription.entity';
+import { Subscription } from '../../subcriptions/entities/subcription.entity';
 
 @Entity()
 export class User {

@@ -4,8 +4,8 @@ import { UpdatePayMethodDto } from './dto/update-pay_method.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PayMethod } from './entities/pay_method.entity';
 import { Repository } from 'typeorm';
-import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
-import { BankService } from 'src/bank/bank.service';
+import { ActiveUserInterface } from '../common/interface/activeUser.interface';
+import { BankService } from '../bank/bank.service';
 
 @Injectable()
 export class PayMethodService {

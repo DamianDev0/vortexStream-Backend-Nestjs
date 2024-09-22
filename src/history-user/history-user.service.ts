@@ -1,11 +1,11 @@
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateHistoryUserDto } from './dto/create-history-user.dto';
 import { UpdateHistoryUserDto } from './dto/update-history-user.dto';
-import { ActiveUserInterface } from 'src/common/interface/activeUser.interface';
+import { ActiveUserInterface } from '../common/interface/activeUser.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HistoryUser } from './entities/history-user.entity';
-import { User } from 'src/users/entities/user.entity';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class HistoryUserService {
