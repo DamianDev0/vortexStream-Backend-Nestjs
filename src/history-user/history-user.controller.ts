@@ -16,7 +16,7 @@ import { Role } from 'src/common/enum/Roles.enum';
 
 @ApiTags('HistoryUser')
 @AuthDecorator(Role.USER)
-@Controller('history-user')
+@Controller('historyuser')
 export class HistoryUserController {
   constructor(private readonly historyUserService: HistoryUserService) {}
 
@@ -32,6 +32,8 @@ export class HistoryUserController {
   async findAll(
     @ActiveUser() user: ActiveUserInterface,
   ) {
+    console.log(user);
+    
     return await this.historyUserService.findAll(user);
   }
 
