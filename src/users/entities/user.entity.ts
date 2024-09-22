@@ -46,7 +46,7 @@ export class User {
   role: Role;
 
   @Column({ default: true, select: false })
-  status: boolean;
+  status?: boolean;
 
   @Column({ nullable: true })
   urlprofile?: string;

@@ -17,7 +17,7 @@ export class Subscription {
 
   @OneToOne(() => User)
   @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
-  user: User;
+  user?: User;
 
   @Column({ nullable: false })
   userId: string;

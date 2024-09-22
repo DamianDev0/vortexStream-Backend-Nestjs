@@ -20,7 +20,6 @@ export class AuthService {
 
   private async encryptPassword(password: string){
     const hashPassword = await bcryptjs.hash(password, 10)
-
     return hashPassword
   }
 
@@ -79,7 +78,6 @@ export class AuthService {
 
     if(userFoundByusername) throw new ConflictException('Username already exists')
     
-    console.log(userDto);
     const userFoundByEmail = await this.userServices.findUserByEmail(userDto.email);
 
     if (userFoundByEmail) throw new ConflictException('Email already exists');
