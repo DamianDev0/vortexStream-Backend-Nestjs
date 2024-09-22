@@ -1,6 +1,9 @@
-import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { CreateHistoryUserDto } from './dto/create-history-user.dto';
-import { UpdateHistoryUserDto } from './dto/update-history-user.dto';
 import { ActiveUserInterface } from '../common/interface/activeUser.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -10,51 +13,75 @@ import { User } from '../users/entities/user.entity';
 @Injectable()
 export class HistoryUserService {
   constructor(
-    @InjectRepository(HistoryUser) private readonly historyUserRepository: Repository<HistoryUser>,
-    @InjectRepository(User) private readonly userRepository: Repository<User>
-  ){}
+    @InjectRepository(HistoryUser)
+    private readonly historyUserRepository: Repository<HistoryUser>,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
 
-  private validateOwnerShip(userId: string, user: ActiveUserInterface){
-    if(userId !== user.id ){
-      throw new UnauthorizedException('You do not have permissions')
+  private validateOwnerShip(userId: string, user: ActiveUserInterface) {
+    if (userId !== user.id) {
+      throw new UnauthorizedException('You do not have permissions');
     }
   }
-  
-  async create(createHistoryUserDto: CreateHistoryUserDto, user: ActiveUserInterface) {
-    const userFound = await this.userRepository.findOne({where: {id: createHistoryUserDto.userId}})
 
-    if(!userFound) throw new BadRequestException('User not Found')
+  async createOrUpdate(
+    createHistoryUserDto: CreateHistoryUserDto,
+    user: ActiveUserInterface,
+  ) {
+    console.log(createHistoryUserDto);
 
-    this.validateOwnerShip(userFound.id, user) 
+    const historyFound = await this.findOne(createHistoryUserDto.mediaId, user);
 
-    return await this.historyUserRepository.save(createHistoryUserDto)
+    if (historyFound) {
+      return await this.update(createHistoryUserDto.mediaId, user);
+    }
+
+    const userFound = await this.userRepository.findOne({
+      where: { id: user.id },
+    });
+    if (!userFound) throw new BadRequestException('User not Found');
+
+    this.validateOwnerShip(userFound.id, user);
+
+    const newHistoryUser = this.historyUserRepository.create(createHistoryUserDto);
+    return await this.historyUserRepository.save(newHistoryUser);
   }
 
   async findAll(user: ActiveUserInterface) {
-    return this.historyUserRepository.find({where: {userId: user.id}});
+    return this.historyUserRepository.find({ where: { userId: user.id } });
   }
 
   async findOne(mediaId: string, user: ActiveUserInterface) {
-    const historyUser = await this.historyUserRepository.findOne({where : {mediaId: mediaId, userId: user.id}})
+    const historyUser = await this.historyUserRepository.findOne({
+      where: { mediaId: mediaId, userId: user.id },
+    });
 
-    this.validateOwnerShip(historyUser.userId, user )
+    if (!historyUser) {
+      return null;
+    }
+
+    this.validateOwnerShip(historyUser.userId, user);
     return historyUser;
   }
 
   async update(mediaId: string, user: ActiveUserInterface) {
-    const historyUserFound = await this.findOne(mediaId, user)
-    
-    if(!historyUserFound) throw new BadRequestException('History uswr Not found')
+    const historyUserFound = await this.findOne(mediaId, user);
 
-     historyUserFound.updatedAt = new Date() 
-    return await this.historyUserRepository.update(historyUserFound.id, historyUserFound);
+    if (!historyUserFound)
+      throw new BadRequestException('History uswr Not found');
+
+    historyUserFound.updatedAt = new Date();
+    return await this.historyUserRepository.update(
+      historyUserFound.id,
+      historyUserFound,
+    );
   }
 
   async remove(mediaId: string, user: ActiveUserInterface) {
-    const hsitoryFound = await this.findOne(mediaId, user)
+    const hsitoryFound = await this.findOne(mediaId, user);
 
-    this.validateOwnerShip(hsitoryFound.userId, user)
-    
+    this.validateOwnerShip(hsitoryFound.userId, user);
+
     return await this.historyUserRepository.remove(hsitoryFound);
   }
 }

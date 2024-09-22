@@ -105,7 +105,7 @@ export class AuthService {
 
     if (changeEmailAndPasswordDto.password) {
       const hashedPassword = await this.encryptPassword(changeEmailAndPasswordDto.password);
-      // Reemplazar la contraseña en el DTO por la versión encriptada
+      
       changeEmailAndPasswordDto.password = hashedPassword;
     }
     

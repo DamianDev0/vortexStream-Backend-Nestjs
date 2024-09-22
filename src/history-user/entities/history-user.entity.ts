@@ -29,11 +29,11 @@ export class HistoryUser {
     synopsis: string;
     
     @Column()
-    raiting: number;
+    rating: number;
 
     @CreateDateColumn({ select: false })
     createdAt: Date;
   
-    @UpdateDateColumn({ select: false })
+    @UpdateDateColumn({ select: true })
     updatedAt: Date;
 }
