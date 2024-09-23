@@ -66,6 +66,7 @@ export class AuthService {
         username: userFound.username,
         email: userFound.email,
         country: userFound.country,
+        prefixCountry: userFound.prefixCountry,
         role: userFound.role,
         urlprofile: userFound.urlprofile
       },
