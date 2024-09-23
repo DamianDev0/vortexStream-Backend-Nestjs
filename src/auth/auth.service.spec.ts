@@ -79,6 +79,7 @@ describe('AuthService', () => {
         status: true,
         createdAt: new Date(),
         updatedAt: new Date(),
+        prefixCountry: ''
       };
 
       const mockSubscription: Subscription = {
@@ -139,6 +140,8 @@ describe('AuthService', () => {
         status: true,
         createdAt: new Date(),
         updatedAt: new Date(),
+        prefixCountry: ''
+
       };
 
       jest.spyOn(userService, 'findByUsernameWithPassword').mockResolvedValue(userFound);
@@ -157,6 +160,8 @@ describe('AuthService', () => {
         status: false,
         country: 'testcountry',
         urlprofile: 'profileUrl',
+        prefixCountry: ''
+
       };
 
       jest.spyOn(userService, 'findByUsername').mockResolvedValue(null);
@@ -177,6 +182,8 @@ describe('AuthService', () => {
         subcription: [],
         createdAt: new Date(),
         updatedAt: new Date(),
+        prefixCountry: ''
+
       };
 
       jest.spyOn(userService, 'create').mockResolvedValue(userToCreate);
@@ -191,13 +198,14 @@ describe('AuthService', () => {
       expect(userService.create).toHaveBeenCalledWith(expect.objectContaining({
         username: registerDto.username,
         email: registerDto.email,
-        password: expect.any(String),
+        password: hashedPassword,
         country: registerDto.country,
         role: Role.USER,
         urlprofile: registerDto.urlprofile,
         status: registerDto.status,
         createdAt: expect.any(Date),
         updatedAt: expect.any(Date),
+        prefixCountry: ''
       }));
     });
 
@@ -208,6 +216,8 @@ describe('AuthService', () => {
         password: 'testPassword',
         country: 'CountryName',
         status: true,
+        prefixCountry: ''
+
       };
 
       const existingUser: User = {
@@ -223,6 +233,8 @@ describe('AuthService', () => {
         status: false,
         createdAt: new Date(),
         updatedAt: new Date(),
+        prefixCountry: ''
+
       };
 
       jest.spyOn(userService, 'findByUsername').mockResolvedValue(existingUser);
@@ -237,6 +249,7 @@ describe('AuthService', () => {
         password: 'testPassword',
         country: '',
         status: false,
+        prefixCountry: ''
       };
 
       const existingUser: User = {
@@ -252,11 +265,12 @@ describe('AuthService', () => {
         status: false,
         createdAt: new Date(),
         updatedAt: new Date(),
+        prefixCountry: ''
+
       };
 
       jest.spyOn(userService, 'findByUsername').mockResolvedValue(null);
       jest.spyOn(userService, 'findUserByEmail').mockResolvedValue(existingUser);
-
       await expect(authService.register(registerDto)).rejects.toThrow(ConflictException);
     });
   });
