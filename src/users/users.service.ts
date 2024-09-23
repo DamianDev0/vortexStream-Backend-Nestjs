@@ -11,12 +11,18 @@ import { UpdateUserDto } from '../auth/dto/updateUser.dto';
 import { ActiveUserInterface } from '../common/interface/activeUser.interface';
 import { ChangeEmailAndPassword } from '../auth/dto/updatePassword&Login.dto';
 import { SubcriptionsService } from '../subcriptions/subcriptions.service';
+import { CloudinaryService } from 'src/common/cloudinary/cloudinary.service';
 
 @Injectable()
 export class UsersService {
+  createActiveUser(createActiveUserDto: { id: string; username: string; role: string; }) {
+      throw new Error('Method not implemented.');
+
+  }
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     private readonly subscriptionServices: SubcriptionsService,
+    private readonly cloudinaryService: CloudinaryService
   ) {}
 
   private validateOwnerShip(userFound: User, user: ActiveUserInterface) {
@@ -83,22 +89,41 @@ export class UsersService {
     return userCreated
   }
 
+
+
   async updateUser(
     id: string,
     updateUserDto: UpdateUserDto,
     user: ActiveUserInterface,
+    file?: Express.Multer.File,
   ) {
-    console.log(id, updateUserDto);
-
-    const res = await this.FindOne(id, user);
-
-    if (!res) {
-      throw new UnauthorizedException();
+    if (!user) {
+      throw new UnauthorizedException('User not authenticated');
     }
-
-    return await this.userRepository.update(id, {
+  
+    const res = await this.userRepository.findOne({ where: { id } });
+  
+    if (!res) {
+      throw new UnauthorizedException('User not found');
+    }
+  
+    if (file) {
+      try {
+        const uploadResult = await this.cloudinaryService.uploadFile(file);
+        updateUserDto.urlprofile = uploadResult.secure_url;
+      } catch (error) {
+        console.error('Error al subir la imagen a Cloudinary:', error);
+        throw new BadRequestException('Error al subir la imagen');
+      }
+    } else if (!updateUserDto.urlprofile) {
+    
+      throw new BadRequestException('No image file uploaded and no URL provided');
+    }
+    const updateResult = await this.userRepository.update(id, {
       ...updateUserDto,
     });
+    
+    return updateResult;
   }
 
   async changePassword(

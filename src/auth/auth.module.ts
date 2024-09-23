@@ -5,6 +5,7 @@ import { UsersModule } from '../users/users.module';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants/jwt.secretKey';
 import { SubcriptionsModule } from '../subcriptions/subcriptions.module';
+import { CloudinaryService } from '../common/cloudinary/cloudinary.service';
 
 @Module({
   imports: [
@@ -17,6 +18,6 @@ import { SubcriptionsModule } from '../subcriptions/subcriptions.module';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, CloudinaryService],
 })
 export class AuthModule {}

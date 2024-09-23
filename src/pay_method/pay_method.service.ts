@@ -50,7 +50,7 @@ export class PayMethodService {
       where: { id },
     });
 
-    console.log(payMethod);
+   
     
     
     if(!payMethod) throw new BadRequestException('PayMethod not found')
@@ -64,7 +64,7 @@ export class PayMethodService {
       const payMethod = await this.PayMethodRepository.findOne({
         where: { userId: userId },
       });
-      console.log(payMethod);
+      
       
       if(!payMethod) throw new BadRequestException('PayMethod not found')
   
