@@ -90,7 +90,6 @@ export class UsersService {
   }
 
 
-
   async updateUser(
     id: string,
     updateUserDto: UpdateUserDto,
