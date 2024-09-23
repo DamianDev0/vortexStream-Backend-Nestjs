@@ -49,9 +49,7 @@ export class AuthService {
     if (!userFound) throw new ConflictException('Username not found');
 
     const isValidPassword = await bcryptjs.compare(password, userFound.password)
-    console.log(isValidPassword);
-    
-
+ 
     if (!isValidPassword) throw new ConflictException('Password is wrong');
 
     const payload = { username: username, role: userFound.role, id: userFound.id };
