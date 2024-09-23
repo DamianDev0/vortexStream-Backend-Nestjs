@@ -33,4 +33,7 @@ export class UpdateUserDto{
     @IsOptional()
     @IsString()
     phoneNumber?: string;
+
+    @IsOptional()
+    urlprofile?: string;
 }

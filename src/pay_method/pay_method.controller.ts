@@ -24,7 +24,7 @@ export class PayMethodController {
   @AuthDecorator(Role.USER)
   @Post()
   async create(@Body() payMethodDto: PayMethodDto, @ActiveUser() user: ActiveUserInterface) {
-    console.log(payMethodDto);
+ 
     
     return await this.payMethodService.create(payMethodDto, user);
   }
