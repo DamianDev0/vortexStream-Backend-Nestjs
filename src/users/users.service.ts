@@ -16,14 +16,14 @@ import { CloudinaryService } from 'src/common/cloudinary/cloudinary.service';
 @Injectable()
 export class UsersService {
   createActiveUser(createActiveUserDto: { id: string; username: string; role: string; }) {
-      throw new Error('Method not implemented.');
+    throw new Error('Method not implemented.');
 
   }
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     private readonly subscriptionServices: SubcriptionsService,
     private readonly cloudinaryService: CloudinaryService
-  ) {}
+  ) { }
 
   private validateOwnerShip(userFound: User, user: ActiveUserInterface) {
     if (userFound.id !== user.id) {
@@ -76,13 +76,13 @@ export class UsersService {
     return await this.userRepository.findOne({ where: { email } });
   }
 
-  async findByUsername(username: string){
-    return await this.userRepository.findOne({where: {username}})
+  async findByUsername(username: string) {
+    return await this.userRepository.findOne({ where: { username } })
   }
 
   async create(createUserDto: RegisterDto) {
     const userCreated = this.userRepository.create(createUserDto);
-    
+
     await this.userRepository.save(userCreated);
     await this.subscriptionServices.create(userCreated.id);
 
@@ -100,29 +100,21 @@ export class UsersService {
     if (!user) {
       throw new UnauthorizedException('User not authenticated');
     }
-  
+
     const res = await this.userRepository.findOne({ where: { id } });
-  
     if (!res) {
       throw new UnauthorizedException('User not found');
     }
-  
+
     if (file) {
-      try {
-        const uploadResult = await this.cloudinaryService.uploadFile(file);
-        updateUserDto.urlprofile = uploadResult.secure_url;
-      } catch (error) {
-        console.error('Error al subir la imagen a Cloudinary:', error);
-        throw new BadRequestException('Error al subir la imagen');
-      }
-    } else if (!updateUserDto.urlprofile) {
-    
-      throw new BadRequestException('No image file uploaded and no URL provided');
+      const uploadResult = await this.cloudinaryService.uploadFile(file);
+      updateUserDto.urlprofile = uploadResult.secure_url;
     }
+
     const updateResult = await this.userRepository.update(id, {
       ...updateUserDto,
     });
-    
+
     return updateResult;
   }
 

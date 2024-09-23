@@ -86,13 +86,13 @@ export class AuthController {
   @AuthDecorator(Role.USER)
   @Patch('changeuserinfo/:id')
   @UseInterceptors(FileInterceptor('profileimage'))
-  async UpdateUserWithImage(
+  async updateUserWithImage(
     @Param('id') id: string,
     @Body() updateUserDto: UpdateUserDto,
     @ActiveUser() user: ActiveUserInterface,
     @UploadedFile() file: Express.Multer.File,
   ) {
-
+   
     return await this.userServices.updateUser(id, updateUserDto, user, file);
   }
 
