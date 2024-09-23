@@ -40,11 +40,11 @@ export class SubcriptionsController {
   @AuthDecorator(Role.USER)
   @Patch(':id')
   update(
-    @Param('id') id: string,
+    @Param('id') userId: string,
     @Body() updateSubcriptionDto: UpdateSubcriptionDto,
     @ActiveUser() user: ActiveUserInterface,
   ) {
-    return this.subcriptionsService.update(id, updateSubcriptionDto, user);
+    return this.subcriptionsService.update(userId, updateSubcriptionDto, user);
   }
 
   @Delete(':id')
