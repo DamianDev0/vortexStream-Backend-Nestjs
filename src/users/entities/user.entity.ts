@@ -37,7 +37,10 @@ export class User {
   password: string;
 
   @Column({ nullable: true })
-  country?: string;
+  country: string;
+
+  @Column({ nullable: true })
+  prefixCountry: string;
 
   @Column({ nullable: true })
   phoneNumber?: string;

@@ -14,6 +14,9 @@ export class RegisterDto {
   @IsString()
   country: string;
 
+  @IsString()
+  prefixCountry: string;
+
   status: boolean;
 
   urlprofile?: string;
