@@ -62,9 +62,9 @@ export class SubcriptionsService {
   }
 
   async update(id: string, updateSubcriptionDto: UpdateSubcriptionDto, user: ActiveUserInterface) {
-    const subscriptionFound = await this.findOne(id, user)
+    const subcriptionFound = await this.findOne(id, user)
     
-    return await this.suscriptionRepository.update(subscriptionFound.id,{
+    return await this.suscriptionRepository.update(subcriptionFound.id,{
       ...updateSubcriptionDto
     });
   }
