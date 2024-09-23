@@ -43,7 +43,7 @@ export class SubcriptionsController {
     @Param('id') id: string,
     @Body() updateSubcriptionDto: UpdateSubcriptionDto,
     @ActiveUser() user: ActiveUserInterface,
-  ) {
+  ) { 
     return this.subcriptionsService.update(id, updateSubcriptionDto, user);
   }
 

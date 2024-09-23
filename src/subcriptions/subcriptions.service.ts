@@ -54,7 +54,7 @@ export class SubcriptionsService {
   }
 
   async findOne(id: string, user: ActiveUserInterface) {
-    const subscription = await this.suscriptionRepository.findOne({where: {id}}) 
+    const subscription = await this.suscriptionRepository.findOne({where: {userId: id}}) 
 
     if(!subscription) throw new BadRequestException('Subscription not found')
 
@@ -62,9 +62,9 @@ export class SubcriptionsService {
   }
 
   async update(id: string, updateSubcriptionDto: UpdateSubcriptionDto, user: ActiveUserInterface) {
-    await this.findOne(id, user)
+    const subcriptionFound = await this.findOne(id, user)
     
-    return await this.suscriptionRepository.update(id,{
+    return await this.suscriptionRepository.update(subcriptionFound.id,{
       ...updateSubcriptionDto
     });
   }
