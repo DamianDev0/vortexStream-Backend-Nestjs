@@ -25,6 +25,10 @@ export class UpdateUserDto{
     @IsOptional()
     @IsString()
     country?: string;
+
+    @IsOptional()
+    @IsString()
+    prefixCountry?: string;
   
     @IsOptional()
     @IsString()
