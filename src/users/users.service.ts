@@ -59,6 +59,7 @@ export class UsersService {
         'country',
         'password',
         'role',
+        'prefixCountry',
         'urlprofile',
         'email',
       ],
