@@ -28,7 +28,7 @@ export class HistoryUserService {
     createHistoryUserDto: CreateHistoryUserDto,
     user: ActiveUserInterface,
   ) {
-    console.log(createHistoryUserDto);
+  
 
     const historyFound = await this.findOne(createHistoryUserDto.mediaId, user);
 

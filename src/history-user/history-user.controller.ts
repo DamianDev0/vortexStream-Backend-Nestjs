@@ -32,7 +32,7 @@ export class HistoryUserController {
   async findAll(
     @ActiveUser() user: ActiveUserInterface,
   ) {
-    console.log(user);
+  
     
     return await this.historyUserService.findAll(user);
   }
