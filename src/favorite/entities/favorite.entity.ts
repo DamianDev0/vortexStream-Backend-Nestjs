@@ -31,6 +31,9 @@ export class Favorite {
     @Column()
     vote_average: number;
 
+    @Column({ nullable: true })
+    typeMedia?: string;
+
     @CreateDateColumn({ select: false })
     createdAt: Date;
   
