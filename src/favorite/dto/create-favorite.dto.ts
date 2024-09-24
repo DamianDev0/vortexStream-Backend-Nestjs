@@ -1,4 +1,4 @@
-import { IsNumber, IsString, MaxLength, maxLength } from "class-validator";
+import { IsNumber, IsOptional, IsString, MaxLength, maxLength } from "class-validator";
 
 export class CreateFavoriteDto {
     @IsString()
@@ -19,4 +19,8 @@ export class CreateFavoriteDto {
 
     @IsNumber()
     vote_average: number;
+
+    @IsOptional()
+    @IsString()
+    typeMedia?: string;
 }
