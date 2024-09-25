@@ -1,11 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { LoginDto } from 'src/auth/dto/login.dto';
-import { RegisterDto } from 'src/auth/dto/register.dto';
-import { Subscription } from 'src/subcriptions/entities/subcription.entity';
-import { User } from 'src/users/entities/user.entity';
-import { UsersService } from 'src/users/users.service';
+import { RegisterDto } from '../auth/dto/register.dto';
+import { Subscription } from '../subcriptions/entities/subcription.entity';
+import { User } from '../users/entities/user.entity';
+import { UsersService } from '../users/users.service';
 import { Repository } from 'typeorm';
 
 @Injectable()
