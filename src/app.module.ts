@@ -30,7 +30,7 @@ import { GoogleAuthService } from './google-auth/google-auth.service';
         password: configService.get<string>('DATABASE_PASSWORD'),
         database: configService.get<string>('DATABASE_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'], // Make sure this resolves correctly
-        synchronize: false, // Disable this in production for safety
+        synchronize: true, // Disable this in production for safety
       }),
       inject: [ConfigService],
     }),
