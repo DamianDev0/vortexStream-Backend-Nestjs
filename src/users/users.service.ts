@@ -143,6 +143,5 @@ export class UsersService {
       ...changeEmailAndPasswordDto,
       email: changeEmailAndPasswordDto.email,
     });
-  }
+  }  
 }
-//

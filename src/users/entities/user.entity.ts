@@ -33,14 +33,14 @@ export class User {
   @Column({unique: true })
   username: string;
 
-  @Column({ nullable: false, select: false })
-  password: string;
+  @Column({ nullable: true, select: false })
+  password?: string;
 
   @Column({ nullable: true })
-  country: string;
+  country?: string;
 
   @Column({ nullable: true })
-  prefixCountry: string;
+  prefixCountry?: string;
 
   @Column({ nullable: true })
   phoneNumber?: string;
