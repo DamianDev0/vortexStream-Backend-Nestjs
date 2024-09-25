@@ -9,6 +9,8 @@ import { CloudinaryModule } from './common/cloudinary/cloudinary.module';
 import { SubcriptionsModule } from './subcriptions/subcriptions.module';
 import { FavoriteModule } from './favorite/favorite.module';
 import { HistoryUserModule } from './history-user/history-user.module';
+import { GoogleAuthController } from './google-auth/google-auth.controller';
+import { GoogleAuthService } from './google-auth/google-auth.service';
 
 @Module({
   imports: [
@@ -43,7 +45,7 @@ import { HistoryUserModule } from './history-user/history-user.module';
     FavoriteModule,
     HistoryUserModule
   ],
-  controllers: [],
-  providers: [],
+  controllers: [GoogleAuthController],
+  providers: [GoogleAuthService],
 })
 export class AppModule {}
